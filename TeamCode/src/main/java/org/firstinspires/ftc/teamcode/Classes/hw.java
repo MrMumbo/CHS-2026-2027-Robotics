@@ -11,7 +11,7 @@ public class hw extends OpMode {
     public DcMotor backLeft;
 
     public void init() {
-        hardwareMap = new HardwareMap(DcMotor, "FrontRight");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
     }
 
     public void loop() {
