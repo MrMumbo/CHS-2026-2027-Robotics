@@ -1,11 +1,18 @@
 package com.example.meepmeeptesting;
 
-// 1. IMPORT THE GEOMETRY PATH (This will now resolve perfectly after Step 1)
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 
 import org.rowlandhall.meepmeep.MeepMeep;
 import org.rowlandhall.meepmeep.roadrunner.DefaultBotBuilder;
 import org.rowlandhall.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
+
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.InputStream;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class MeepMeepTesting {
     public static void main(String[] args) {
@@ -25,7 +32,21 @@ public class MeepMeepTesting {
                         .turn(Math.toRadians(90))
                         .build());
 
-        meepMeep.setBackground(MeepMeep.Background.FIELD_INTOTHEDEEP_JUICE_DARK)
+        Image img = null;
+        try {
+            // Looks directly into the 'resources' folder on any device
+            InputStream is = MeepMeepTesting.class.getClassLoader().getResourceAsStream("biobuzz.png");
+            if (is != null) {
+                img = ImageIO.read(is);
+            } else {
+                System.out.println("Error: biobuzz.png not found in resources folder!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        assert img != null;
+        meepMeep.setBackground(img)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)
                 .addEntity(myBot)
