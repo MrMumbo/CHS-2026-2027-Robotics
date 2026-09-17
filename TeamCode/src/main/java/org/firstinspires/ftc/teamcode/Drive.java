@@ -1,17 +1,17 @@
 package org.firstinspires.ftc.teamcode;
 
-import org.firstinspires.ftc.teamcode.Classes.hw;
+import org.firstinspires.ftc.teamcode.Classes.Hardware;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name="Drive Logic", group="Teleop")
 public class Drive extends OpMode {
     boolean DpDown= true;
-    hw hw = new hw();
+    Hardware Hardware = new Hardware();
 
     @Override
     public void init() {
-        hw.declareHardware(hardwareMap);
+        Hardware.declareHardware(hardwareMap);
     }
 
     @Override
@@ -20,9 +20,9 @@ public class Drive extends OpMode {
         if(gamepad1.dpad_down){DpDown = !DpDown;}
 
         if (DpDown) {
-            hw.driveFieldRel(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+            Hardware.driveFieldRel(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
         } else {
-            hw.drive(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
+            Hardware.drive(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x);
         }
     }
 }

@@ -4,10 +4,13 @@ import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-public class hw {
+public class Hardware {
+
+    ElapsedTime Movetimer = new ElapsedTime();
     public DcMotor frontRight;
     public DcMotor frontLeft;
     public DcMotor backRight;
@@ -36,6 +39,16 @@ public class hw {
         frontLeft.setPower(x + y - r);
         backRight.setPower(x - y + r);
         backLeft.setPower(x - y - r);
+    }
+
+    public void driveTime(float x, float y, float r, long time) {
+        Movetimer.reset();
+        while (Movetimer.seconds() < time) {
+            frontRight.setPower(x + y + r);
+            frontLeft.setPower(x + y - r);
+            backRight.setPower(x - y + r);
+            backLeft.setPower(x - y - r);
+        }
     }
 
     public void driveFieldRel(float x, float y, float r) {
